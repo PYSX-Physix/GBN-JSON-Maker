@@ -1,9 +1,9 @@
 const articleData = {
-    name: "Black Ops 6 Season 01 Patch Notes Nov 19",
-    image: "https://gbn-api.pages.dev/images/BO6-SEASON-01-PATCH-NOTES.jpg",
-    date: "November 19, 2024",
+    name: "",
+    image: "",
+    date: "",
     details: {
-        description: "First real article. This article is about everything new with the patch notes for Black Ops 6 on November 19, 2024.",
+        description: "",
         content: []
     }
 };
@@ -37,6 +37,21 @@ function addElement(type) {
 }
 
 function generateJSON() {
+    const name = document.getElementById('articleName').value;
+    const image = document.getElementById('articleImage').value;
+    const date = document.getElementById('articleDate').value;
+    const description = document.getElementById('articleDescription').value;
+
+    if (!name || !image || !date || !description) {
+        alert('Please fill out all required fields.');
+        return;
+    }
+
+    articleData.name = name;
+    articleData.image = image;
+    articleData.date = date;
+    articleData.details.description = description;
+
     const article = document.getElementById('article');
     const elements = article.children;
     articleData.details.content = [];

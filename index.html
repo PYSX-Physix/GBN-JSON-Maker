@@ -13,10 +13,15 @@
         .controls { margin-bottom: 20px; }
         .controls button { margin-right: 10px; }
         .json-output { margin-top: 20px; white-space: pre-wrap; background: #f4f4f4; padding: 10px; border: 1px solid #ddd; }
+        .required { color: red; }
     </style>
 </head>
 <body>
     <div class="controls">
+        <label>Article Name: <input type="text" id="articleName" required></label><span class="required">*</span><br>
+        <label>Image URL: <input type="text" id="articleImage" required></label><span class="required">*</span><br>
+        <label>Date: <input type="date" id="articleDate" required></label><span class="required">*</span><br>
+        <label>Description: <textarea id="articleDescription" required></textarea></label><span class="required">*</span><br>
         <button onclick="addElement('paragraph')">Add Paragraph</button>
         <button onclick="addElement('image')">Add Image</button>
         <button onclick="addElement('header')">Add Header</button>
