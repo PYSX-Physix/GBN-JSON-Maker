@@ -7,7 +7,7 @@ async function fetchArticles() {
         const articles = await response.json();
         displayTitles(articles);
     } catch (error) {
-        console.error('Failed to fetch articles:', error);
+        console.error('Failed to fetch articles:', error, 'Services may be offline');
     }
 }
 
