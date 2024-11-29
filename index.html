@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        img { max-width: 100%; height: auto; }
+        .header { font-size: 2em; margin-top: 20px; }
+        .subheader { font-size: 1.5em; margin-top: 15px; }
+        .paragraph { margin-top: 10px; }
+        .controls { margin-bottom: 20px; }
+        .controls button { margin-right: 10px; }
+        .json-output { margin-top: 20px; white-space: pre-wrap; background: #f4f4f4; padding: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button onclick="addElement('paragraph')">Add Paragraph</button>
+        <button onclick="addElement('image')">Add Image</button>
+        <button onclick="addElement('header')">Add Header</button>
+        <button onclick="addElement('subheader')">Add Subheader</button>
+        <button onclick="generateJSON()">Generate JSON</button>
+    </div>
+    <div id="article"></div>
+    <div class="json-output" id="jsonOutput"></div>
+    <script src="script.js"></script>
+</body>
+</html>
