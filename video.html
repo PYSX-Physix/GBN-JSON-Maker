@@ -1,1 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video JSON Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .controls { margin-bottom: 20px; }
+        .controls label { display: block; margin-top: 10px; }
+        .json-output { margin-top: 20px; white-space: pre-wrap; background: #f4f4f4; padding: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <label>Video Name: <input type="text" id="videoName" required></label>
+        <label>Image URL: <input type="text" id="imageUrl" required></label>
+        <label>Video URL: <input type="text" id="videoUrl" required></label>
+        <label>Author: <input type="text" id="author" required></label>
+        <button onclick="generateJSON()">Generate JSON</button>
+    </div>
+    <div class="json-output" id="jsonOutput"></div>
+    <script src="script.js"></script>
+</body>
+</html>
 
