@@ -5,31 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Article Generator</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        img { max-width: 100%; height: auto; }
-        .header { font-size: 2em; margin-top: 20px; }
-        .subheader { font-size: 1.5em; margin-top: 15px; }
-        .paragraph { margin-top: 10px; }
-        .controls { margin-bottom: 20px; }
-        .controls button { margin-right: 10px; }
-        .json-output { margin-top: 20px; white-space: pre-wrap; background: #f4f4f4; padding: 10px; border: 1px solid #ddd; }
-        .required { color: red; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+        .controls label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .controls input,
+        .controls textarea,
+        .controls button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .controls button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .controls button:hover {
+            background-color: #0056b3;
+        }
+        .json-output {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .required {
+            color: red;
+        }
     </style>
 </head>
 <body>
-    <div class="controls">
-        <label>Article Name: <input type="text" id="articleName" required></label><span class="required">*</span><br>
-        <label>Image URL: <input type="text" id="articleImage" required></label><span class="required">*</span><br>
-        <label>Date: <input type="date" id="articleDate" required></label><span class="required">*</span><br>
-        <label>Description: <textarea id="articleDescription" required></textarea></label><span class="required">*</span><br>
-        <button onclick="addElement('paragraph')">Add Paragraph</button>
-        <button onclick="addElement('image')">Add Image</button>
-        <button onclick="addElement('header')">Add Header</button>
-        <button onclick="addElement('subheader')">Add Subheader</button>
-        <button onclick="generateJSON()">Generate JSON</button>
+    <div class="container">
+        <h1>Article Generator</h1>
+        <div class="controls">
+            <label>Article Name: <input type="text" id="articleName" required></label><span class="required">*</span><br>
+            <label>Image URL: <input type="text" id="articleImage" required></label><span class="required">*</span><br>
+            <label>Date: <input type="date" id="articleDate" required></label><span class="required">*</span><br>
+            <label>Description: <textarea id="articleDescription" required></textarea></label><span class="required">*</span><br>
+            <button onclick="addElement('paragraph')">Add Paragraph</button>
+            <button onclick="addElement('image')">Add Image</button>
+            <button onclick="addElement('header')">Add Header</button>
+            <button onclick="addElement('subheader')">Add Subheader</button>
+            <button onclick="generateJSON()">Generate JSON</button>
+        </div>
+        <div id="article"></div>
+        <div class="json-output" id="jsonOutput"></div>
     </div>
-    <div id="article"></div>
-    <div class="json-output" id="jsonOutput"></div>
     <script src="script.js"></script>
 </body>
 </html>
