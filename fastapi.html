@@ -155,51 +155,79 @@
 
     <script>
         document.getElementById('article-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const image = document.getElementById('image').value;
-    const date = document.getElementById('date').value;
-    const description = document.getElementById('description').value;
-    const content = document.getElementById('content').value;
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const image = document.getElementById('image').value;
+            const date = document.getElementById('date').value;
+            const description = document.getElementById('description').value;
+            const content = document.getElementById('content').value.split('\n').map(line => {
+                const [type, ...text] = line.split(':');
+                return { type: type.trim(), text: text.join(':').trim() };
+            });
 
-    const article = {
-        name: name,
-        image: image,
-        date: date,
-        details: {
-            description: description,
-            content: content
+            const article = {
+                name: name,
+                image: image,
+                date: date,
+                details: {
+                    description: description,
+                    content: content
+                }
+            };
+
+            fetch('/articles/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(article)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Article added:', data);
+                // Add code to update the article list
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        function editArticle(name) {
+            fetch(`/articles/${name}`)
+            .then(response => response.json())
+            .then(article => {
+                document.getElementById('name').value = article.name;
+                document.getElementById('image').value = article.image;
+                document.getElementById('date').value = article.date;
+                document.getElementById('description').value = article.details.description;
+                document.getElementById('content').value = article.details.content.map(item => `${item.type}: ${item.text}`).join('\n');
+            })
+            .catch(error => console.error('Error:', error));
         }
-    };
 
-    // Add your code here to send the article to the server (e.g., using fetch API)
-    console.log('Article added:', article);
-});
-
-function editArticle(name) {
-    // Add your code here to fetch the article details and populate the form for editing
-    console.log('Edit article:', name);
-}
-
-function deleteArticle(name) {
-    // Add your code here to delete the article from the server
-    console.log('Delete article:', name);
-}
-
-// Example of how to add event listeners to edit and delete buttons
-document.querySelectorAll('.article-item button').forEach(button => {
-    button.addEventListener('click', function() {
-        const action = this.textContent.toLowerCase();
-        const articleName = this.parentElement.querySelector('h3').textContent;
-
-        if (action === 'edit') {
-            editArticle(articleName);
-        } else if (action === 'delete') {
-            deleteArticle(articleName);
+        function deleteArticle(name) {
+            fetch(`/articles/${name}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Article deleted:', data);
+                // Add code to update the article list
+            })
+            .catch(error => console.error('Error:', error));
         }
-    });
-});
 
+        // Example of how to add event listeners to edit and delete buttons
+        document.querySelectorAll('.article-item button').forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.textContent.toLowerCase();
+                const articleName = this.parentElement.querySelector('h3').textContent;
+
+                if (action === 'edit') {
+                    editArticle(articleName);
+                } else if (action === 'delete') {
+                    deleteArticle(articleName);
+                }
+            });
+        });
     </script>
 </body>
 </html>
