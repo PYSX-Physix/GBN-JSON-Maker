@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            margin-top: 0;
+        }
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .form-container input[type="text"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+        .form-container input[type="submit"] {
+            background: #333;
+            color: #fff;
+            border: 0;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .form-container input[type="submit"]:hover {
+            background: #77aaff;
+        }
+        .article-list {
+            margin-top: 20px;
+        }
+        .article-item {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .article-item h3 {
+            margin-top: 0;
+        }
+        .article-item button {
+            background: #333;
+            color: #fff;
+            border: 0;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .article-item button:hover {
+            background: #77aaff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>Article Management</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Add Article</a></li>
+                    <li><a href="#">Edit Article</a></li>
+                    <li><a href="#">Delete Article</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Add New Article</h2>
+            <form id="article-form">
+                <label for="name">Article Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="image">Image URL</label>
+                <input type="text" id="image" name="image" required>
+
+                <label for="date">Date</label>
+                <input type="text" id="date" name="date" required>
+
+                <label for="description">Description</label>
+                <textarea id="description" name="description" required></textarea>
+
+                <label for="content">Content</label>
+                <textarea id="content" name="content" required></textarea>
+
+                <input type="submit" value="Add Article">
+            </form>
+        </div>
+
+        <div class="article-list">
+            <h2>Articles</h2>
+            <div class="article-item">
+                <h3>Article Title</h3>
+                <p>Article description goes here...</p>
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('article-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const image = document.getElementById('image').value;
+    const date = document.getElementById('date').value;
+    const description = document.getElementById('description').value;
+    const content = document.getElementById('content').value;
+
+    const article = {
+        name: name,
+        image: image,
+        date: date,
+        details: {
+            description: description,
+            content: content
+        }
+    };
+
+    // Add your code here to send the article to the server (e.g., using fetch API)
+    console.log('Article added:', article);
+});
+
+function editArticle(name) {
+    // Add your code here to fetch the article details and populate the form for editing
+    console.log('Edit article:', name);
+}
+
+function deleteArticle(name) {
+    // Add your code here to delete the article from the server
+    console.log('Delete article:', name);
+}
+
+// Example of how to add event listeners to edit and delete buttons
+document.querySelectorAll('.article-item button').forEach(button => {
+    button.addEventListener('click', function() {
+        const action = this.textContent.toLowerCase();
+        const articleName = this.parentElement.querySelector('h3').textContent;
+
+        if (action === 'edit') {
+            editArticle(articleName);
+        } else if (action === 'delete') {
+            deleteArticle(articleName);
+        }
+    });
+});
+
+    </script>
+</body>
+</html>
